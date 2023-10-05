@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React, { useState } from 'react'
 import { TbTemperatureFahrenheit } from 'react-icons/tb'
 
@@ -24,7 +25,7 @@ import {
 } from '../animations/weathergifs'
 import { ForecastTypes } from '../types/data-types'
 
-const weatherIcons = {
+const weatherIcons: {} = {
   1000: sunny,
   1003: cloudy,
   1006: cloudy,
@@ -57,11 +58,23 @@ type ValueProps = {
   value: ForecastTypes
 }
 
-const CardLeft = ({ value }: any) => {
+const CardLeft = ({ value }: ValueProps): JSX.Element => {
   const [imgSrc, setImgSrc] = useState(false)
+
+  let valueIconValue: number = value.current.condition.code
+  console.log('[WEATHER CODE FOR LOCATION IS...]', valueIconValue)
+
+  // if (weatherIcons.hasOwnProperty(valueIconValue)) {
+  //   setImgSrc(true)
+  // } else {
+  //   setImgSrc(false)
+  // }
+
+  let absoluteURL = `http:${value.current.condition.icon}`
+
   return (
     <div className='text-center px-2 md:px-6'>
-      <img
+      <Image
         className='mx-auto'
         alt='weather-icon'
         // src={
@@ -70,12 +83,9 @@ const CardLeft = ({ value }: any) => {
         //     : value?.current.condition.icon
         // }
 
-        src={
-          weatherIcons[value?.current.condition.code] ||
-          value?.current.condition.icon
-        }
-        // width='140'
-        // height='140'
+        src={weatherIcons[value.current.condition.code] || absoluteURL}
+        width='140'
+        height='140'
       />
 
       <div className='text-white font-bold flex items-center '>

@@ -3,9 +3,9 @@ import React from 'react'
 import { BsSearch } from 'react-icons/bs'
 
 type InputTypes = {
-  handleSubmit: () => void
-  handleClick: () => void
-  handleChange: () => void
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const FormInput = ({ handleSubmit, handleClick, handleChange }: InputTypes) => {

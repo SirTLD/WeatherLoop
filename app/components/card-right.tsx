@@ -12,7 +12,11 @@ import {
   compass
 } from '../animations/weathergifs'
 
-const CardRight = (value) => {
+type Props = {
+  value: ForecastTypes
+}
+
+const CardRight = ({ value }: Props): JSX.Element => {
   return (
     <div
       className=' h-full w-full px-2  grid 

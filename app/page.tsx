@@ -1,20 +1,23 @@
 'use client'
 
 import axios from 'axios'
-import Image from 'next/image'
+
 import React, { useEffect, useState } from 'react'
 
-import { BsSearch } from 'react-icons/bs'
-import windsock from '../public/icons/windsock.svg'
 import WeatherDisplay from './components/weather-display'
+
 import { WeatherIconTypes, ForecastTypes } from './types/data-types'
+
 import toast, { Toaster } from 'react-hot-toast'
+
 import FormInput from './components/form-input'
+
+import WelcomeDisplay from './components/welcome-display'
 
 export default function Home() {
   const [weather, setWeather] = useState<ForecastTypes | null>()
 
-  const [location, setLocation] = useState<string>()
+  const [location, setLocation] = useState<string>('')
 
   const [error, setError] = useState(false)
 
@@ -36,6 +39,9 @@ export default function Home() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value === '') {
+      return
+    }
     setLocation(e.target.value)
   }
 
@@ -55,33 +61,20 @@ export default function Home() {
   return (
     <div className='flex justify-center  items-center h-screen w-full flex-col bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
       <FormInput
-        handleChange={() => handleChange}
-        handleClick={() => handleClick}
-        handleSubmit={() => handleSubmit}
+        handleChange={handleChange}
+        handleClick={handleClick}
+        handleSubmit={handleSubmit}
       />
-      {/* 
-      {weather && <WeatherDisplay value={weather} />} */}
 
-      {error && (
-        <div>
-          <Toaster />
-        </div>
-      )}
+      {/* DISPLAY WEATHER DATA */}
+
+      {weather && <WeatherDisplay value={weather} />}
+
+      {/* DISPLAY CUSTOM ERROR DATA */}
 
       {/* PAGE DEFAULT WITH NO WEATHER DATA */}
 
-      {!weather && (
-        <div
-          className='W-full drop-shadow-xl m bg-black/30 backdrop-blur 
-          rounded-2xl px-4 mt-4 md:mt-10 py-10 flex items-center flex-col justify-center text-white'
-        >
-          <Image src={windsock} alt='default screen' height='200' width='200' />
-          Hi, Welcome to my app.
-        </div>
-      )}
+      {!weather && <WelcomeDisplay />}
     </div>
   )
 }
-
-// className='flex justify-center items-center h-screen w-full
-//   flex-col bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'
