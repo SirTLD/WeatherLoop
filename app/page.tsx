@@ -15,7 +15,9 @@ import FormInput from './components/form-input'
 import WelcomeDisplay from './components/welcome-display'
 
 import TitleDisplay from './components/title-display'
+
 import Footer from './components/footer'
+
 import Error from './components/error'
 
 export default function Home() {
