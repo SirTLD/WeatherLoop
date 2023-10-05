@@ -23,7 +23,7 @@ const CardRight = ({ value }: Props): JSX.Element => {
   grid-rows-2 grid-cols-2 gap-2 md:gap-2'
     >
       <WeatherIcons
-        dayData={value.current.wind_dir}
+        dayData={`${value.current.wind_mph} mph`}
         desc={'Wind'}
         imgURL={wind}
       />
@@ -35,7 +35,7 @@ const CardRight = ({ value }: Props): JSX.Element => {
       />
 
       <WeatherIcons
-        dayData={value.current.humidity}
+        dayData={`${value.current.humidity} %`}
         desc={'Humidity'}
         imgURL={humidity}
       />

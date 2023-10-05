@@ -2,17 +2,21 @@
 
 import axios from 'axios'
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import WeatherDisplay from './components/weather-display'
 
-import { WeatherIconTypes, ForecastTypes } from './types/data-types'
+import { ForecastTypes } from './types/data-types'
 
 import toast, { Toaster } from 'react-hot-toast'
 
 import FormInput from './components/form-input'
 
 import WelcomeDisplay from './components/welcome-display'
+
+import TitleDisplay from './components/title-display'
+import Footer from './components/footer'
+import Error from './components/error'
 
 export default function Home() {
   const [weather, setWeather] = useState<ForecastTypes | null>()
@@ -59,22 +63,29 @@ export default function Home() {
   }
 
   return (
-    <div className='flex justify-center  items-center h-screen w-full flex-col bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
-      <FormInput
-        handleChange={handleChange}
-        handleClick={handleClick}
-        handleSubmit={handleSubmit}
-      />
+    <div className='flex justify-center items-center space-y-12 h-screen w-full flex-col bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
+      <TitleDisplay />
 
-      {/* DISPLAY WEATHER DATA */}
+      <div>
+        <FormInput
+          handleChange={handleChange}
+          handleClick={handleClick}
+          handleSubmit={handleSubmit}
+        />
+        {/* DISPLAY WEATHER DATA */}
 
-      {weather && <WeatherDisplay value={weather} />}
+        {weather && <WeatherDisplay value={weather} />}
+      </div>
 
       {/* DISPLAY CUSTOM ERROR DATA */}
+
+      {error && <Error />}
 
       {/* PAGE DEFAULT WITH NO WEATHER DATA */}
 
       {!weather && <WelcomeDisplay />}
+
+      <Footer />
     </div>
   )
 }

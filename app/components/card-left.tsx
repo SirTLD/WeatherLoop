@@ -61,14 +61,7 @@ type ValueProps = {
 const CardLeft = ({ value }: ValueProps): JSX.Element => {
   const [imgSrc, setImgSrc] = useState(false)
 
-  let valueIconValue: number = value.current.condition.code
-  console.log('[WEATHER CODE FOR LOCATION IS...]', valueIconValue)
-
-  // if (weatherIcons.hasOwnProperty(valueIconValue)) {
-  //   setImgSrc(true)
-  // } else {
-  //   setImgSrc(false)
-  // }
+  let imgIconValue: number = value.current.condition.code
 
   let absoluteURL = `http:${value.current.condition.icon}`
 
@@ -77,12 +70,6 @@ const CardLeft = ({ value }: ValueProps): JSX.Element => {
       <Image
         className='mx-auto'
         alt='weather-icon'
-        // src={
-        //   imgSrc
-        //     ? {weatherIcons[value?.current.condition.code]}[]
-        //     : value?.current.condition.icon
-        // }
-
         src={weatherIcons[value.current.condition.code] || absoluteURL}
         width='140'
         height='140'
