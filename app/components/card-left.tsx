@@ -23,9 +23,10 @@ import {
   sunny,
   rain
 } from '../animations/weathergifs'
+
 import { ForecastTypes } from '../types/data-types'
 
-const weatherIcons: {} = {
+const weatherIcons: any = {
   1000: sunny,
   1003: cloudy,
   1006: cloudy,
