@@ -3,7 +3,7 @@ import { BsFillSuitHeartFill } from 'react-icons/bs'
 
 const Footer = () => {
   return (
-    <div className='flex items-center text-sm '>
+    <div className='flex items-center text-sm mt-24'>
       Made with{' '}
       <BsFillSuitHeartFill className='text-red-500 shadow-sm ml-2 text-2xl' />
     </div>

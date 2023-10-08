@@ -8,8 +8,6 @@ import WeatherDisplay from './components/weather-display'
 
 import { ForecastTypes } from './types/data-types'
 
-import toast, { Toaster } from 'react-hot-toast'
-
 import FormInput from './components/form-input'
 
 import WelcomeDisplay from './components/welcome-display'
@@ -71,8 +69,8 @@ export default function Home() {
   return (
     <div className='h-screen w-screen'>
       <div
-        className='flex justify-center items-center space-y-4 h-full 
-    w-full flex-col bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'
+        className={`flex justify-center items-center  h-full 
+    w-full flex-col bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500`}
       >
         <TitleDisplay />
 
@@ -89,12 +87,8 @@ export default function Home() {
 
           {/* DISPLAY WEATHER DATA */}
 
-          {weather && <WeatherDisplay value={weather} />}
+          {weather ? <WeatherDisplay value={weather} /> : <WelcomeDisplay />}
         </div>
-
-        {/* PAGE DEFAULT WITH NO WEATHER DATA */}
-
-        {!weather && <WelcomeDisplay />}
 
         <Footer />
       </div>
