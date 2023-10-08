@@ -1,7 +1,7 @@
 export type WeatherIconTypes = {
   imgURL: string
   desc: string
-  dayData?: number
+  dayData?: number | string
 }
 
 export type ForecastTypes = {
