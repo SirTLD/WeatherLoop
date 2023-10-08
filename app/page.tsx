@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import WeatherDisplay from './components/weather-display'
 
@@ -34,13 +34,17 @@ export default function Home() {
     axios
       .get(URL)
       .then((res) => {
+        if (res.status !== 200) {
+          setError(true)
+        }
+
         setWeather(res.data)
+        setError(false)
       })
       .catch(({ err }) => {
-        setError(err)
+        setError(true)
 
-        toast.error('Something Went Wrong')
-        console.log('[WEATHERLOOP_ERROR', err)
+        console.log('[WEATHERLOOP_ERROR]', err)
       })
   }
 
@@ -65,29 +69,35 @@ export default function Home() {
   }
 
   return (
-    <div className='flex justify-center items-center space-y-12 h-screen w-full flex-col bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
-      <TitleDisplay />
+    <div className='h-screen w-screen'>
+      <div
+        className='flex justify-center items-center space-y-4 h-full 
+    w-full flex-col bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'
+      >
+        <TitleDisplay />
 
-      <div>
-        <FormInput
-          handleChange={handleChange}
-          handleClick={handleClick}
-          handleSubmit={handleSubmit}
-        />
-        {/* DISPLAY WEATHER DATA */}
+        <div>
+          {/* DISPLAY CUSTOM ERROR DATA */}
 
-        {weather && <WeatherDisplay value={weather} />}
+          {error && <Error />}
+
+          <FormInput
+            handleChange={handleChange}
+            handleClick={handleClick}
+            handleSubmit={handleSubmit}
+          />
+
+          {/* DISPLAY WEATHER DATA */}
+
+          {weather && <WeatherDisplay value={weather} />}
+        </div>
+
+        {/* PAGE DEFAULT WITH NO WEATHER DATA */}
+
+        {!weather && <WelcomeDisplay />}
+
+        <Footer />
       </div>
-
-      {/* DISPLAY CUSTOM ERROR DATA */}
-
-      {error && <Error />}
-
-      {/* PAGE DEFAULT WITH NO WEATHER DATA */}
-
-      {!weather && <WelcomeDisplay />}
-
-      <Footer />
     </div>
   )
 }

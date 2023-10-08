@@ -14,7 +14,7 @@ const FormInput = ({ handleSubmit, handleClick, handleChange }: InputTypes) => {
       <form
         onSubmit={handleSubmit}
         className=' cursor-pointer items-center 
-      w-full  p-3 md:p-4 bg-black/20 border-gray-300 rounded-2xl '
+      w-full p-3 md:p-4 bg-black/20 border-gray-300 rounded-2xl '
       >
         <div className='flex justify-between'>
           <input
